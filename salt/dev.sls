@@ -28,7 +28,7 @@ dev_pip_packages:
 virtualenvwrapper_configuration:
     file.append:
         - name: /home/vagrant/.bashrc
-        - text: | +
+        - text: |+
             WORKON_HOME=/usr/local/virtualenvs
             PROJECT_HOME=/project
             source /usr/local/bin/virtualenvwrapper.sh
@@ -37,7 +37,7 @@ virtualenvwrapper_configuration:
 virtualenvwrapper_root_configuration:
     file.append:
         - name: /root/.bashrc
-        - text: | +
+        - text: |+
             WORKON_HOME=/usr/local/virtualenvs
             PROJECT_HOME=/project
             source /usr/local/bin/virtualenvwrapper.sh
