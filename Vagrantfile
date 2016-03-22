@@ -8,6 +8,8 @@ Vagrant.configure(2) do |config|
   # Map our "salt" directory in this project to "/srv/salt" on the
   # server
   config.vm.synced_folder "salt", "/srv/salt"
+  # Map our "project" directory in this project to "/project"
+  config.vm.synced_folder "salt", "/srv/salt"
 
   # Create a public network so we can access the server from other devices
   # on our network.

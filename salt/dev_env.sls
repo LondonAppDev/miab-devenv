@@ -29,7 +29,7 @@ virtualenvwrapper_configuration:
         - name: /home/vagrant/.bashrc
         - test: | +
             WORKON_HOME=/usr/local/virtualenvs
-            PROJECT_HOME=/vagrant
+            PROJECT_HOME=/project
             source /usr/local/bin/virtualenvwrapper.sh
 
 # Setup virtualenvwrapper for root.
@@ -38,7 +38,7 @@ virtualenvwrapper_root_configuration:
         - name: /root/.bashrc
         - test: | +
             WORKON_HOME=/usr/local/virtualenvs
-            PROJECT_HOME=/vagrant
+            PROJECT_HOME=/project
             source /usr/local/bin/virtualenvwrapper.sh
 
 # Install MariaDB Database.
