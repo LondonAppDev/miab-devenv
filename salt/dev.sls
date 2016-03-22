@@ -1,33 +1,34 @@
-# Install the required packages (Python).
+# Install the packages "python3-dev" and "python-pip".
 dev_packages:
     pkg.installed:
         - pkgs:
             - python3-dev
             - python-pip
 
-# Install the pip packages.
+# Install "virtualenvwrapper" with pip.
 dev_pip_packages:
     pip.installed:
         - pkgs:
             - virtualenvwrapper
 
-# Setup the project virtual-environment.
+# Create the directory for our virtual env.
 /usr/local/virtualenvs:
     file.directory:
-        - user: root
-        - group: root
+        - user: vagrant
+        - group: vagrant
 
 # Create the virtual environment.
 /usr/local/virtualenvs/env:
     virtualenv.managed:
         - system_site_packages: False
         - python: python3.4
+        - user: vagrant
 
 # Setup virtualenvwrapper.
 virtualenvwrapper_configuration:
     file.append:
         - name: /home/vagrant/.bashrc
-        - test: | +
+        - text: | +
             WORKON_HOME=/usr/local/virtualenvs
             PROJECT_HOME=/project
             source /usr/local/bin/virtualenvwrapper.sh
@@ -36,31 +37,24 @@ virtualenvwrapper_configuration:
 virtualenvwrapper_root_configuration:
     file.append:
         - name: /root/.bashrc
-        - test: | +
+        - text: | +
             WORKON_HOME=/usr/local/virtualenvs
             PROJECT_HOME=/project
             source /usr/local/bin/virtualenvwrapper.sh
 
-# Install MariaDB Database.
-mariadb_repo_installed:
-    pkgrepo.managed:
-        - humanname: MariaDB10.1 Repository
-        - name: deb [arch=amd64,i386] http://lon1.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu trusty main
-        - file: /etc/apt/sources.list.d/MariaDB.list
-        - keyid: '0xcbcb082a1bb943db'
-        - keyserver: keyserver.ubuntu.com
-        - refresh_db: True
-
-# Install the MariaDB server using the root password of 'password'.
-mariadb_server_installed:
+# Install the MySQL server using the root password of 'password'.
+mysql_server_installed:
     debconf.set:
-        - name: mariadb-server
+        - name: mysql-server
         - data:
             'mysql-server/root_password': {'type': 'string', 'value': 'password'}
             'mysql-server/root_password_again': {'type': 'string', 'value': 'password'}
+    pkg.installed:
+        - pkgs:
+            - mysql-server
 
-# Enable the service so MariaDB starts when the server boots.
-mariadb_mysql_service_enabled:
+# Enable the service so MySQL starts when the server boots.
+mysql_service_enabled:
     service.running:
         - name: mysql
         - enable: True
