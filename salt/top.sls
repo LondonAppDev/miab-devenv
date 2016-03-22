@@ -1,3 +1,3 @@
 base:
     '*':
-        - dev_env
+        - dev
