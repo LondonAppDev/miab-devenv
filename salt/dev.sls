@@ -58,3 +58,11 @@ mysql_service_enabled:
     service.running:
         - name: mysql
         - enable: True
+
+# Create a database in MySQL called 'miab_db'
+create_database:
+    mysql_database.present:
+        - connection_user: root
+        - connection_pass: 'password'
+        - connection_charset: utf8
+        - name: 'miab_db'
