@@ -4,6 +4,7 @@ dev_packages:
         - pkgs:
             - python3-dev
             - python-pip
+            - libmysqlclient-dev
 
 # Install "virtualenvwrapper" with pip.
 dev_pip_packages:
